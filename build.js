@@ -14,5 +14,6 @@ const textExt = new Set(['.html', '.xml', '.txt', '.css', '.js']);
     else fs.copyFileSync(p, o);
   }
 })(src);
+fs.writeFileSync(path.join(out, '.nojekyll'), ''); // GitHub Pages: serve files as-is
 const bytes = (d) => fs.readdirSync(d).reduce((n, f) => { const p = path.join(d, f); return n + (fs.statSync(p).isDirectory() ? bytes(p) : fs.statSync(p).size); }, 0);
 console.log('built docs/ for', SITE_URL, '-', Math.round(bytes(out) / 1024), 'KB total');
